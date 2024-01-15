@@ -1,8 +1,11 @@
 import Layout from "./layout/Layout";
+import Home from "./pages/Home/Home";
 const App = () => {
   return (
     <Layout>
-      <div className="">app</div>
+      <div className="">
+        <Home />
+      </div>
     </Layout>
   );
 };

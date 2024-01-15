@@ -1,17 +1,25 @@
+import LoaderSlice from "@/features/LoaderSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
+import userSlice from "@/features/userSlice";
 const persistConfig = {
   key: "root",
   storage,
 };
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  user: userSlice,
+  loader: LoaderSlice,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

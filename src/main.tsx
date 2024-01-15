@@ -8,7 +8,13 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 const persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
