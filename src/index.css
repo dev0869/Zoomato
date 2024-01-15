@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gray: "#4F4F4F";
+  --black: "#1CICIC";
+  --teal: "#009999";
+  --blue: "#2781E7";
+  --yellow: "#F8D149";
+  --red: "#E23744";
+}
+body {
+  min-height: 100vh;
+  position: relative;
+  background-color: #ffffff;
+}
+
+@font-face {
+  font-family: Lemon-Regular;
+  src: url("./assets/fonts/Lemon-Regular.ttf");
+}
