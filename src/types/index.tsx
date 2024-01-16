@@ -19,6 +19,8 @@ export interface MenuItem {
 
 export type ErrorResponse = {
   response: {
-    data: { message: string };
+    data: {
+      message: string;
+    };
   };
 };

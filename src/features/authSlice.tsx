@@ -5,12 +5,13 @@ import { Product } from "@/services/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { ErrorResponse } from "@/types";
 import { toast } from "react-toastify";
+import { RegisterSchemaType } from "@/lib/types";
 const initialState = {
   loading: false,
-  user: {},
+  user: null,
 } as {
   loading: boolean;
-  user: object | void;
+  user: RegisterSchemaType | void | null;
 };
 
 export const RegisterApis = createAsyncThunk<void, object>(
@@ -36,9 +37,6 @@ export const loginApis = createAsyncThunk<void, object>(
         toast.error(`${res.data.message}`);
       } else if (res.data.result === true) {
         toast.success("Login Successfully");
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 1000);
       }
       return res.data?.data;
     } catch (error) {
