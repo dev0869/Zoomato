@@ -2,7 +2,10 @@ import { getFoodCategory } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 import Categories from "./Categories";
 import Products from "./Products";
+import { useAppSelector } from "@/app/hooks";
 const Home = () => {
+  const load = useAppSelector((st) => st.auth.loading);
+  console.log(load);
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["categories"],
     queryFn: getFoodCategory,

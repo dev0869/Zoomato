@@ -1,4 +1,5 @@
-import LoaderSlice from "@/features/LoaderSlice";
+import authSlice from "@/features/authSlice";
+import LoaderSlice from "@/features/loaderSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
@@ -11,6 +12,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userSlice,
   loader: LoaderSlice,
+  auth: authSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

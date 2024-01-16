@@ -16,3 +16,9 @@ export interface MenuItem {
   restaurantName: string;
   type: string;
 }
+
+export type ErrorResponse = {
+  response: {
+    data: { message: string };
+  };
+};

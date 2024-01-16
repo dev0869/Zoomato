@@ -1,31 +1,42 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { RegisterApis, loginApis } from "@/features/authSlice";
+import { useAppDispatch } from "@/app/hooks";
+import { useAppSelector } from "@/app/hooks";
+
 import {
   LoginSchemas,
   LoginInferSchema,
   RegisterSchemaType,
   RegisterSchemas,
 } from "@/lib/types";
+
 const SignUpForm = () => {
-  const [formData, setFormdata] = useState<RegisterSchemaType | undefined>();
+  const loading = useAppSelector((st) => st.auth.loading);
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<RegisterSchemaType>({
     resolver: zodResolver(RegisterSchemas),
   });
 
-  const submit: SubmitHandler<RegisterSchemaType> = (data) => {
+  const submit: SubmitHandler<RegisterSchemaType> = async (data) => {
     const initialValue = {
       userId: 0,
       role: "user",
       restaurantId: 0,
     };
-    setFormdata({ ...data, ...initialValue });
-    console.log(formData);
+    try {
+      await dispatch(RegisterApis({ ...data, ...initialValue })).unwrap();
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -93,23 +104,28 @@ const SignUpForm = () => {
         type="submit"
         className="w-full text-white bg-red-500 hover:bg-primary-700 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
       >
-        Create an account
+        {loading ? "loading....." : "Create an account"}
       </button>
     </form>
   );
 };
 
 const SignInForm = () => {
-  const [formData, setFormdata] = useState<LoginInferSchema | undefined>();
-  console.log(formData);
+  const loading = useAppSelector((st) => st.auth.loading);
+  console.log(loading);
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<LoginInferSchema>({ resolver: zodResolver(LoginSchemas) });
   const submit: SubmitHandler<LoginInferSchema> = (data) => {
-    setFormdata(data);
-    console.log(data);
+    dispatch(loginApis(data))
+      .unwrap()
+      .then(() => {
+        reset();
+      });
   };
 
   return (
@@ -147,7 +163,7 @@ const SignInForm = () => {
         type="submit"
         className="w-full text-white bg-red-500 hover:bg-primary-700 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
       >
-        Create an account
+        {loading ? "loading....." : "Create an account"}
       </button>
     </form>
   );
