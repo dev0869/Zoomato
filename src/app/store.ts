@@ -9,15 +9,15 @@ import cartSlice from "@/features/cartSlice";
 //   key: "root",
 //   storage,
 // };
-const rootReducer = combineReducers({
-  cart: cartSlice,
-  loader: LoaderSlice,
-  auth: authSlice,
-});
-
+// const rootReducer = combineReducers({
+//   cart: cartSlice,
+//   loader: LoaderSlice,
+//   auth: authSlice,
+// });
+// justand
 // const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: rootReduces,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
