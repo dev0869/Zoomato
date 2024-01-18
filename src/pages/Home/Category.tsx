@@ -1,4 +1,4 @@
-import { CategoryProps } from "@/types";
+import { ProductStore } from "@/features/ProductStore";
 import {
   Carousel,
   CarouselContent,
@@ -6,10 +6,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-interface category {
-  data: CategoryProps[];
-}
-const Categories = ({ data }: category) => {
+import { CategoryProps } from "@/types";
+const Category = () => {
+  const { Categories } = ProductStore();
   return (
     <Carousel
       opts={{
@@ -18,7 +17,7 @@ const Categories = ({ data }: category) => {
       className="w-full h-full p-2 max-w-screen"
     >
       <CarouselContent>
-        {data?.reverse().map((ele, index) => (
+        {(Categories as CategoryProps[] | null)?.reverse().map((ele, index) => (
           <CarouselItem
             key={index}
             className="md:basis-[30%] px-4 gap-4 space-x-9 lg:basis-[20%]"
@@ -38,4 +37,4 @@ const Categories = ({ data }: category) => {
   );
 };
 
-export default Categories;
+export default Category;

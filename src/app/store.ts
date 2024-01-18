@@ -5,19 +5,19 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import cartSlice from "@/features/cartSlice";
-// const persistConfig = {
-//   key: "root",
-//   storage,
-// };
-// const rootReducer = combineReducers({
-//   cart: cartSlice,
-//   loader: LoaderSlice,
-//   auth: authSlice,
-// });
-// justand
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistConfig = {
+  key: "root",
+  storage,
+};
+const rootReducer = combineReducers({
+  cart: cartSlice,
+  loader: LoaderSlice,
+  auth: authSlice,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
-  reducer: rootReduces,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

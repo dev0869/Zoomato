@@ -15,7 +15,6 @@ import {
   ReactPortal,
   Key,
 } from "react";
-export const CartItems = JSON.parse(localStorage.getItem("carts")!);
 
 export interface ProductType {
   quantity: number;
@@ -36,6 +35,8 @@ interface CartProps {
 }
 
 export function Cart({ data }: CartProps) {
+  const CartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+  console.log(CartItems);
   const result = data.reduce(
     (accumulator: { [x: string]: ProductType }, current: ProductType) => {
       const { itemID, quantity, ...rest } = current;
@@ -54,7 +55,7 @@ export function Cart({ data }: CartProps) {
   );
 
   const datas = Object.values(result);
-  localStorage.setItem("carts", JSON.stringify(datas));
+  // localStorage.setItem("carts", JSON.stringify(datas));
 
   return (
     <div className="flex">

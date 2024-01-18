@@ -19,7 +19,7 @@ export function LogoutBtn() {
   const finalproducts = useAppSelector((state) => state.cart.cartItem);
   console.log(finalproducts);
   const Logout = () => {
-    localStorage.removeItem("persist:root");
+    localStorage.removeItem("user");
     window.location.href = "/";
   };
   return (

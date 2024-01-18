@@ -1,42 +1,51 @@
-import { MenuItem } from "@/types";
+import { ProductTypeProps } from "@/types";
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { CartApi } from "@/app/apis";
-import { addCarts } from "@/features/cartSlice";
-interface dataprops {
-  datas: MenuItem[];
-}
+import { CartApi } from "@/services/api";
 
-const Card = ({ datas }: dataprops) => {
-  const user = useAppSelector((state) => state.auth.user) as { userId: number };
-  const cart = useAppSelector((state) => state.cart.cartItems);
-  const allproducts = useAppSelector((state) => state.cart.Products);
-  const finalProducts = cart.map((cartItem) => {
-    const product = allproducts.find(
-      (product) => product.itemID === cartItem.itemId
-    );
-    return {
-      ...product,
-      quantity: cartItem.quantity,
-      customerId: cartItem.customerId,
-    };
+import { useMutation } from "@tanstack/react-query";
+import { AddCartDetails } from "@/features/CartStore";
+import { ProductStore } from "@/features/ProductStore";
+const Card = () => {
+  const User = JSON.parse(localStorage.getItem("user")!);
+  const { MenuItems } = ProductStore();
+  // const allproducts = useAppSelector((state) => state.cart.Products);
+  // const finalProducts = cartDetails.map((cartItem) => {
+  //   const product = MenuItems.find(
+  //     (product) => product.itemID === cartItem.itemId
+  //   );
+  //   return {
+  //     ...product,
+  //     quantity: cartItem.quantity,
+  //     customerId: cartItem.customerId,
+  //     itemId: cartItem.itemId,
+  //   };
+  // });
+
+  // console.log(finalProducts);
+  const mutation = useMutation({
+    mutationKey: ["addCart"],
+    mutationFn: (data) => CartApi(data),
+    onSuccess: (data) => {
+      AddCartDetails(data);
+    },
   });
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [value, setValue] = useState<number>(1);
   const addCart = (itmNumber: number) => {
     const CartData = {
-      customerId: user?.userId,
+      customerId: User?.userId,
       itemId: itmNumber,
       quantity: value,
     };
-    dispatch(CartApi(CartData));
+    mutation.mutate(CartData);
+    // dispatch(CartApi(CartData));
   };
-  dispatch(addCarts(finalProducts));
+  // dispatch(addCarts(finalProducts));
 
   return (
     <div className="flex  gap-2 rounded-xl flex-wrap justify-center">
-      {datas?.map((ele, id) => {
+      {(MenuItems as ProductTypeProps[] | null)?.map((ele, id) => {
         const itmNumber = ele.itemID;
         return (
           <React.Fragment key={id}>
@@ -59,7 +68,7 @@ const Card = ({ datas }: dataprops) => {
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     {ele.price} {ele.restaurantID}
                   </button>
-                  {user ? (
+                  {User ? (
                     <>
                       <button onClick={() => addCart(itmNumber)}>sdds</button>
                       <input

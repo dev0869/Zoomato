@@ -1,24 +1,43 @@
-import { loginApis } from "@/app/apis";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { LoginInferSchema, LoginSchemas } from "@/lib/types";
+import { getCustumer, loginApi } from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+
 const SignInForm = () => {
-  const loading = useAppSelector((st) => st.auth.loading);
-  console.log(loading);
-  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<LoginInferSchema>({ resolver: zodResolver(LoginSchemas) });
+
+  const mutation = useMutation({
+    mutationKey: ["login"],
+    mutationFn: (data: LoginInferSchema) => {
+      return loginApi(data);
+    },
+    onMutate: () => {
+      setLoading(true);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+    onSuccess: (data) => {
+      setLoading(false);
+      getCustumer(data.userId);
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000);
+    },
+  });
+
   const submit: SubmitHandler<LoginInferSchema> = (data) => {
-    dispatch(loginApis(data))
-      .unwrap()
-      .then(() => {
-        reset();
-      });
+    mutation.mutate(data);
+    reset();
   };
 
   return (

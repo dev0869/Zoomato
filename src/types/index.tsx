@@ -4,7 +4,7 @@ export interface CategoryProps {
   photoUrl: string;
 }
 
-export interface MenuItem {
+export interface ProductTypeProps {
   availability: boolean;
   categoryName: string;
   description: string;

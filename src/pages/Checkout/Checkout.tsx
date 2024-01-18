@@ -1,8 +1,9 @@
 import { checkoutApi } from "@/app/apis";
-import { CartItems } from "../cart/Cart";
 import { useAppDispatch } from "@/app/hooks";
 const Checkout = () => {
   const dispatch = useAppDispatch();
+  const CartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+
   const data = CartItems.map(
     (ele: { customerId: number; price: number; restaurantID: number }) => {
       return {

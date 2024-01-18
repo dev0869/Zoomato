@@ -1,10 +1,8 @@
-import { useAppSelector } from "@/app/hooks";
 import AuthModel from "./AuthModel";
 import SearchBar from "./SearchBar";
 import { LogoutBtn } from "./LogoutBtn";
 const Navbar = () => {
-  const user = useAppSelector((st) => st.auth.user);
-  console.log(user);
+  const User = JSON.parse(localStorage.getItem("user")!);
 
   return (
     <>
@@ -16,9 +14,9 @@ const Navbar = () => {
           </div>
 
           <div className="flex-[2] justify-center ">
-            {user ? (
+            {User ? (
               <div className="flex gap-4 justify-center items-center">
-                <p className="text-xl text-grays"> 👋{user?.userName}</p>
+                <p className="text-xl text-grays"> 👋{User?.userName}</p>
                 <LogoutBtn />
               </div>
             ) : (

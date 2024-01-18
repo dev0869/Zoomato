@@ -36,10 +36,10 @@ export const cartSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(CartApi.fulfilled, (state, action) => {
-      state.cartItems.push(action.payload);
-      localStorage.setItem("carts", JSON.stringify(action.payload));
-    });
+    // builder.addCase(CartApi.fulfilled, (state, action) => {
+    //   state.cartItems.push(action.payload);
+    //   localStorage.setItem("carts", JSON.stringify(action.payload));
+    // });
     builder.addCase(getCartItmes.fulfilled, (state, action) => {
       state.cartItems = action.payload;
     });
