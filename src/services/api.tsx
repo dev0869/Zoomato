@@ -1,5 +1,5 @@
 import { AddCategories, AddMenuItems, AddUser } from "@/features/ProductStore";
-import { LoginInferSchema } from "@/lib/types";
+import { LoginInferSchema, RegisterSchemaType } from "@/lib/types";
 import { ErrorResponse } from "@/types";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -58,15 +58,10 @@ export const getCustumer = async (id: number | null) => {
   }
 };
 
-export const CartApi = async (data) => {
+export const RegisterApi = async (data: RegisterSchemaType) => {
   try {
-    const res = await Product.post("/AddToCart", data);
-    if (res.data.result === false) {
-      toast.error(`${res.data.message}`);
-    } else if (res.data.result === true) {
-      toast.success(`${res.data.message}`);
-    }
-    return res.data?.data;
+    const res = await Product.post("/AddNewUser", data);
+    return res.data;
   } catch (error) {
     toast.error((error as ErrorResponse).response.data.message);
   }

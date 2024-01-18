@@ -1,4 +1,3 @@
-import { CartType } from "@/features/cartSlice";
 import { checkoutType } from "@/lib/types";
 import { Product } from "@/services/api";
 import { ErrorResponse } from "@/types";

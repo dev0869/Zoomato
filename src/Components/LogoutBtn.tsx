@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { useAppSelector } from "@/app/hooks";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,11 +12,8 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Cart } from "@/pages/cart/Cart";
 
 export function LogoutBtn() {
-  const finalproducts = useAppSelector((state) => state.cart.cartItem);
-  console.log(finalproducts);
   const Logout = () => {
     localStorage.removeItem("user");
     window.location.href = "/";
@@ -30,7 +26,6 @@ export function LogoutBtn() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <Cart data={finalproducts} />
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>

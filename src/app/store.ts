@@ -2,20 +2,15 @@ import authSlice from "@/features/authSlice";
 import LoaderSlice from "@/features/loaderSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+
 import cartSlice from "@/features/cartSlice";
-const persistConfig = {
-  key: "root",
-  storage,
-};
+
 const rootReducer = combineReducers({
   cart: cartSlice,
   loader: LoaderSlice,
   auth: authSlice,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>

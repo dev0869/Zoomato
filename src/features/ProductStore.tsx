@@ -10,13 +10,13 @@ export const ProductStore = create<UseBoundStore>(() => ({
   User: null,
 }));
 
-export const AddMenuItems = (items) =>
+export const AddMenuItems = (items: null | undefined) =>
   ProductStore.setState({ MenuItems: items });
 
-export const AddCategories = (items) =>
+export const AddCategories = (items: null) =>
   ProductStore.setState({ Categories: items });
 
-export const AddUser = (user) => {
+export const AddUser = (user: null) => {
   ProductStore.setState({ User: user });
   localStorage.setItem("user", JSON.stringify(user));
 };

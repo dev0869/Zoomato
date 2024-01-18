@@ -1,15 +1,14 @@
-import { RegisterApis } from "@/app/apis";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { RegisterApi } from "@/services/api";
 import { RegisterSchemaType, RegisterSchemas } from "@/lib/types";
 import { ErrorResponse } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 
 const SignUpForm = () => {
-  const loading = useAppSelector((st) => st.auth.loading);
-  const dispatch = useAppDispatch();
-
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -19,6 +18,17 @@ const SignUpForm = () => {
     resolver: zodResolver(RegisterSchemas),
   });
 
+  const mutation = useMutation({
+    mutationKey: ["Register"],
+    mutationFn: (data: RegisterSchemaType) => RegisterApi(data),
+    onSuccess: () => {
+      setLoading(false);
+    },
+    onMutate: () => {
+      setLoading(true);
+    },
+  });
+
   const submit: SubmitHandler<RegisterSchemaType> = async (data) => {
     const initialValue = {
       userId: 0,
@@ -26,7 +36,7 @@ const SignUpForm = () => {
       restaurantId: 0,
     };
     try {
-      await dispatch(RegisterApis({ ...data, ...initialValue })).unwrap();
+      mutation.mutate({ ...data, ...initialValue });
       reset();
     } catch (error) {
       toast.error((error as ErrorResponse).response.data.message);

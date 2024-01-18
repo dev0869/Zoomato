@@ -1,7 +1,7 @@
 import { getAllFoodItems, getFoodCategory } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 import Products from "./Products";
-
+import Product from "../Product/Product";
 import Category from "./Category";
 const Home = () => {
   const {
@@ -21,12 +21,7 @@ const Home = () => {
     queryKey: ["Items"],
     queryFn: getAllFoodItems,
   });
-  if (m) {
-    console.log("mis lodarr");
-  }
-  if (n) {
-    console.log("misssss lodarr");
-  }
+
   return (
     <div className="py-4">
       <p className="py-5 text-4xl text-grays">
@@ -34,6 +29,7 @@ const Home = () => {
       </p>
       <Category />
       <Products />
+      <Product />
     </div>
   );
 };

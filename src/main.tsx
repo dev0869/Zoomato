@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./app/store.ts";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -20,13 +21,14 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
-    <ToastContainer />
-    <Provider store={store}>
-      {/* <PersistGate persistor={persistor} /> */}
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <App />
-      </QueryClientProvider>
-    </Provider>
+    <Router>
+      <ToastContainer />
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <App />
+        </QueryClientProvider>
+      </Provider>
+    </Router>
   </>
 );
