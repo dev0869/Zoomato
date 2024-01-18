@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/app/hooks";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
@@ -13,8 +13,11 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Cart } from "@/pages/cart/Cart";
 
 export function LogoutBtn() {
+  const finalproducts = useAppSelector((state) => state.cart.cartItem);
+  console.log(finalproducts);
   const Logout = () => {
     localStorage.removeItem("persist:root");
     window.location.href = "/";
@@ -27,11 +30,10 @@ export function LogoutBtn() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <Cart data={finalproducts} />
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -54,7 +56,7 @@ export function LogoutBtn() {
             <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
-                <DropdownMenuItem>Email</DropdownMenuItem>
+                <DropdownMenuItem> </DropdownMenuItem>
                 <DropdownMenuItem>Message</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>More...</DropdownMenuItem>

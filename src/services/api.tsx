@@ -6,7 +6,7 @@ export const Product = axios.create({
 export const getFoodCategory = async () => {
   try {
     const res = await Product.get("/GetAllFoodCategory");
-    console.log(res.data);
+    // console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -16,7 +16,7 @@ export const getFoodCategory = async () => {
 export const getAllFoodItems = async () => {
   try {
     const res = await Product.get("/GetAllMenu");
-    console.log(res.data);
+
     return res.data;
   } catch (error) {
     console.log(error);

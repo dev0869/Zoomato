@@ -4,20 +4,20 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import userSlice from "@/features/userSlice";
-const persistConfig = {
-  key: "root",
-  storage,
-};
+import cartSlice from "@/features/cartSlice";
+// const persistConfig = {
+//   key: "root",
+//   storage,
+// };
 const rootReducer = combineReducers({
-  user: userSlice,
+  cart: cartSlice,
   loader: LoaderSlice,
   auth: authSlice,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

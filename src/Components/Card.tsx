@@ -1,14 +1,27 @@
 import { MenuItem } from "@/types";
 import React, { useState } from "react";
-import { Cart } from "@/pages/cart/Cart";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { CartApi } from "@/features/userSlice";
+import { CartApi } from "@/app/apis";
+import { addCarts } from "@/features/cartSlice";
 interface dataprops {
   datas: MenuItem[];
 }
+
 const Card = ({ datas }: dataprops) => {
-  const user = useAppSelector((st) => st.auth.user);
-  console.log(user);
+  const user = useAppSelector((state) => state.auth.user) as { userId: number };
+  const cart = useAppSelector((state) => state.cart.cartItems);
+  const allproducts = useAppSelector((state) => state.cart.Products);
+  const finalProducts = cart.map((cartItem) => {
+    const product = allproducts.find(
+      (product) => product.itemID === cartItem.itemId
+    );
+    return {
+      ...product,
+      quantity: cartItem.quantity,
+      customerId: cartItem.customerId,
+    };
+  });
+
   const dispatch = useAppDispatch();
   const [value, setValue] = useState<number>(1);
   const addCart = (itmNumber: number) => {
@@ -19,6 +32,7 @@ const Card = ({ datas }: dataprops) => {
     };
     dispatch(CartApi(CartData));
   };
+  dispatch(addCarts(finalProducts));
 
   return (
     <div className="flex  gap-2 rounded-xl flex-wrap justify-center">
@@ -45,16 +59,19 @@ const Card = ({ datas }: dataprops) => {
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     {ele.price} {ele.restaurantID}
                   </button>
-                  <button onClick={() => addCart(itmNumber)}>sdds</button>
-                  <input
-                    type="number"
-                    value={value}
-                    className="w-[20%] border-gray-200 border-[1px] rounded-sm px-2"
-                    onChange={(e) =>
-                      setValue(parseInt(e.target.value, 10) || 0)
-                    }
-                  />
-                  <Cart />
+                  {user ? (
+                    <>
+                      <button onClick={() => addCart(itmNumber)}>sdds</button>
+                      <input
+                        type="number"
+                        value={value}
+                        className="w-[20%] border-gray-200 border-[1px] rounded-sm px-2"
+                        onChange={(e) =>
+                          setValue(parseInt(e.target.value, 10) || 0)
+                        }
+                      />
+                    </>
+                  ) : null}
                 </div>
               </div>
             </div>

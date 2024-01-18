@@ -3,18 +3,19 @@ import { useQuery } from "@tanstack/react-query";
 import Categories from "./Categories";
 import Products from "./Products";
 import { useAppSelector } from "@/app/hooks";
+import Checkout from "../Checkout/Checkout";
 const Home = () => {
   const load = useAppSelector((st) => st.auth.loading);
-  console.log(load);
+  // console.log(load);
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["categories"],
     queryFn: getFoodCategory,
   });
   if (isSuccess) {
-    console.log("okkkkkkkk");
+    // console.log("okkkkkkkk");
   }
   if (isLoading) {
-    console.log("loading");
+    // console.log("loading");
   }
   return (
     <div className="py-4">

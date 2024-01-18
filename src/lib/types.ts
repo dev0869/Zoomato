@@ -17,3 +17,10 @@ export const RegisterSchemas = z.object({
   restaurantId: z.number().optional(),
 });
 export type RegisterSchemaType = z.infer<typeof RegisterSchemas>;
+
+export type checkoutType = {
+  userId: number;
+  totalAmount: number;
+  restaurantId: number;
+  deliveryAddress: string;
+};

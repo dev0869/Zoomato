@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
     <ToastContainer />
     <Provider store={store}>
-      <PersistGate persistor={persistor} />
+      {/* <PersistGate persistor={persistor} /> */}
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <App />
