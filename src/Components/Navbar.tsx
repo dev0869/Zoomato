@@ -2,9 +2,8 @@ import AuthModel from "./AuthModel";
 import SearchBar from "./SearchBar";
 import { LogoutBtn } from "./LogoutBtn";
 import { Link } from "react-router-dom";
+export const User = JSON.parse(localStorage.getItem("user")!);
 const Navbar = () => {
-  const User = JSON.parse(localStorage.getItem("user")!);
-
   return (
     <>
       <nav className="md:max-w-[1100px] py-2 mx-auto">

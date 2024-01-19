@@ -13,7 +13,15 @@ const AuthModel = ({ type }: Authtype) => {
     <>
       <Dialog>
         <DialogTrigger>
-          <p className="text-xl text-grays">{type}</p>
+          <p className="text-xl text-grays">
+            {type === "CheckOut" ? (
+              <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
+                Make Order
+              </button>
+            ) : (
+              type
+            )}
+          </p>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <div className="p-2 space-y-1 md:space-y-6 sm:p-8">

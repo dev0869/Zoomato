@@ -1,14 +1,21 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import { User } from "@/components/Navbar";
+import AuthModel from "@/components/AuthModel";
+import { AddOrders } from "@/features/ProductStore";
 const Product = () => {
+  console.log(User);
   const summary = useLocation().state;
+  console.log(summary);
+  const [qty, setQty] = useState(1);
 
-  {
-    "userId": 0,
-    "totalAmount": 0,
-    "restaurantId": 0,
-    "deliveryAddress": "string"
-  }
+  const data = {
+    userId: User.userId,
+    totalAmount: summary?.price * qty,
+    restaurantId: 0,
+  };
+
+  AddOrders(data);
 
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-white">
@@ -21,7 +28,7 @@ const Product = () => {
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">
-              {summary?.menuItemName}
+              {summary?.menuItemName} {summary?.restaurantID}
             </h2>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
               {summary?.categoryName}
@@ -33,19 +40,22 @@ const Product = () => {
                 <span className="mr-3">Qty:</span>
                 <div className="relative">
                   <input
+                    value={qty}
+                    onChange={(e) => setQty(+e.target.value)}
                     type="number"
                     className="w-[30%] border-gray-200 border-[1px] rounded-sm px-2"
                   />
                 </div>
               </div>
             </div>
-            <div className="flex">
+            <div className="flex justify-between">
               <span className="title-font font-medium text-2xl text-gray-900">
-                ${summary?.price}
+                ${summary?.price * qty}
               </span>
-              <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
-                Make Order
-              </button>
+              <div>
+                <AuthModel type="CheckOut" />
+              </div>
+
               <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                 <svg
                   fill="currentColor"

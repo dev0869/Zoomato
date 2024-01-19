@@ -18,10 +18,10 @@ export interface ProductTypeProps {
 }
 
 export interface CheckoutProps {
-  userId: number;
-  totalAmount: number;
-  restaurantId: number;
-  deliveryAddress: string;
+  userId: number | undefined;
+  totalAmount: number | undefined;
+  restaurantId: number | undefined;
+  deliveryAddress?: string;
 }
 export type ErrorResponse = {
   response: {

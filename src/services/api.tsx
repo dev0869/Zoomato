@@ -2,6 +2,7 @@ import { AddCategories, AddMenuItems, AddUser } from "@/features/ProductStore";
 import { LoginInferSchema, RegisterSchemaType } from "@/lib/types";
 import { CheckoutProps, ErrorResponse } from "@/types";
 import axios from "axios";
+import { access } from "fs/promises";
 import { toast } from "react-toastify";
 export const Product = axios.create({
   baseURL: "https://freeapi.miniprojectideas.com/api/zomato",
@@ -74,5 +75,17 @@ export const checkoutApi = async (data: CheckoutProps) => {
     return res.data;
   } catch (error) {
     toast.error((error as ErrorResponse).response.data.message);
+  }
+};
+
+export const getCurrentLocation = async ({ a, b }) => {
+  try {
+    const res = await axios.get(
+      `https://geocode.maps.co/reverse?lat=${a}&lon=${b}&api_key=65aa1fb0a1465715292287gvjfaf9e8`
+    );
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
   }
 };
