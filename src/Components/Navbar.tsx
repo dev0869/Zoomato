@@ -6,7 +6,7 @@ export const User = JSON.parse(localStorage.getItem("user")!);
 const Navbar = () => {
   return (
     <>
-      <nav className="md:max-w-[1100px] py-2 mx-auto">
+      <nav className="md:max-w-[1100px] sticky bg-white z-[9] top-0 py-2 mx-auto">
         <div className="flex items-center justify-between">
           <div className="flex-[8] items-center gap-4 flex">
             <Link to={"/"}>

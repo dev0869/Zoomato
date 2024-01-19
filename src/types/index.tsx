@@ -30,3 +30,8 @@ export type ErrorResponse = {
     };
   };
 };
+
+export type LocartionProps = {
+  a: number;
+  b: number;
+};

@@ -4,11 +4,8 @@ import { User } from "@/components/Navbar";
 import AuthModel from "@/components/AuthModel";
 import { AddOrders } from "@/features/ProductStore";
 const Product = () => {
-  console.log(User);
   const summary = useLocation().state;
-  console.log(summary);
   const [qty, setQty] = useState(1);
-
   const data = {
     userId: User.userId,
     totalAmount: summary?.price * qty,

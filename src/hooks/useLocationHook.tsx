@@ -1,11 +1,11 @@
 import { getCurrentLocation } from "@/services/api";
+import { LocartionProps } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
-const useLocationHook = ({ longitudes, latitudes }) => {
-  console.log(longitudes, latitudes);
+const useLocationHook = (loc: LocartionProps) => {
   return useQuery({
-    queryKey: ["location"],
-    queryFn: () => getCurrentLocation({ a: latitudes, b: longitudes }),
+    queryKey: ["location", loc],
+    queryFn: () => getCurrentLocation(loc),
   });
 };
 

@@ -1,8 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
 import { AddCategories, AddMenuItems, AddUser } from "@/features/ProductStore";
 import { LoginInferSchema, RegisterSchemaType } from "@/lib/types";
-import { CheckoutProps, ErrorResponse } from "@/types";
+import { CheckoutProps, ErrorResponse, LocartionProps } from "@/types";
 import axios from "axios";
-import { access } from "fs/promises";
 import { toast } from "react-toastify";
 export const Product = axios.create({
   baseURL: "https://freeapi.miniprojectideas.com/api/zomato",
@@ -78,12 +78,12 @@ export const checkoutApi = async (data: CheckoutProps) => {
   }
 };
 
-export const getCurrentLocation = async ({ a, b }) => {
+export const getCurrentLocation = async (loc: LocartionProps) => {
+  const { a, b } = loc;
   try {
     const res = await axios.get(
       `https://geocode.maps.co/reverse?lat=${a}&lon=${b}&api_key=65aa1fb0a1465715292287gvjfaf9e8`
     );
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);
