@@ -29,7 +29,6 @@ const Home = () => {
       </p>
       <Category />
       <Products />
-      <Product />
     </div>
   );
 };

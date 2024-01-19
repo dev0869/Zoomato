@@ -17,6 +17,12 @@ export interface ProductTypeProps {
   type: string;
 }
 
+export interface CheckoutProps {
+  userId: number;
+  totalAmount: number;
+  restaurantId: number;
+  deliveryAddress: string;
+}
 export type ErrorResponse = {
   response: {
     data: {

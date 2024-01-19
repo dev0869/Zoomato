@@ -2,6 +2,14 @@ import { useLocation } from "react-router-dom";
 
 const Product = () => {
   const summary = useLocation().state;
+
+  {
+    "userId": 0,
+    "totalAmount": 0,
+    "restaurantId": 0,
+    "deliveryAddress": "string"
+  }
+
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-white">
       <div className="container px-5 py-24 mx-auto">
@@ -22,27 +30,12 @@ const Product = () => {
             <p className="leading-relaxed">{summary?.description}</p>
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
               <div className="flex ml-6 items-center">
-                <span className="mr-3">Size</span>
+                <span className="mr-3">Qty:</span>
                 <div className="relative">
-                  <select className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
-                    <option>SM</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                  </select>
-                  <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M6 9l6 6 6-6"></path>
-                    </svg>
-                  </span>
+                  <input
+                    type="number"
+                    className="w-[30%] border-gray-200 border-[1px] rounded-sm px-2"
+                  />
                 </div>
               </div>
             </div>
