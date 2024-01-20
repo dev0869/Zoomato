@@ -3,23 +3,35 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Checkout from "@/pages/Checkout/Checkout";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
+import FormRestraunt from "./FormRestraunt";
+import { useLocation } from "react-router-dom";
 
 interface Authtype {
-  type: "Sign Up" | "Log In" | "CheckOut";
+  type: "Sign Up" | "Log In" | "CheckOut" | "Restaurant";
 }
 
 const AuthModel = ({ type }: Authtype) => {
+  const location = useLocation();
+  const isRestaurant = location.pathname === "/partner-with-us";
   return (
     <>
       <Dialog>
         <DialogTrigger>
           <p className="text-xl text-grays">
+            {(type === "Log In" || type === "Restaurant") && isRestaurant ? (
+              <p className="bg-[#0366D6] text-xl text-nowrap text-white px-6  rounded-md  py-3">
+                Register Your Restaurant
+              </p>
+            ) : (
+              <p className="text-nowrap">{type}</p>
+            )}
+
             {type === "CheckOut" ? (
               <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
                 Make Order
               </button>
             ) : (
-              type
+              type !== "Log In"
             )}
           </p>
         </DialogTrigger>
@@ -29,9 +41,11 @@ const AuthModel = ({ type }: Authtype) => {
               {type === "Sign Up"
                 ? "Create an Account"
                 : type === "Log In"
-                ? "Log In"
+                ? "Login"
                 : type === "CheckOut"
                 ? "Checkout"
+                : type === "Restaurant"
+                ? "Register Restaurant"
                 : null}
             </h1>
 
@@ -41,6 +55,8 @@ const AuthModel = ({ type }: Authtype) => {
               <SignInForm />
             ) : type === "CheckOut" ? (
               <Checkout />
+            ) : type === "Restaurant" ? (
+              <FormRestraunt />
             ) : null}
           </div>
         </DialogContent>

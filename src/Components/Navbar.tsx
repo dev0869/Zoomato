@@ -4,10 +4,11 @@ import { LogoutBtn } from "./LogoutBtn";
 import { Link } from "react-router-dom";
 export const User = JSON.parse(localStorage.getItem("user")!);
 const Navbar = () => {
+  console.log(User);
   return (
     <>
       <nav className="md:max-w-[1100px] sticky bg-white z-[9] top-0 py-2 mx-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 justify-between">
           <div className="flex-[8] items-center gap-4 flex">
             <Link to={"/"}>
               {" "}

@@ -21,7 +21,6 @@ export const AddCategories = (items: null) =>
 
 export const AddUser = (user: null) => {
   ProductStore.setState({ User: user });
-  localStorage.setItem("user", JSON.stringify(user));
 };
 
 export const AddOrders = (orders: CheckoutProps) => {

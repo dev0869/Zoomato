@@ -18,6 +18,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const { userId, totalAmount, restaurantId } = Orders ?? {};
   const [address, setAddress] = useState("");
+
   const isFormValid = address;
 
   const data = {
