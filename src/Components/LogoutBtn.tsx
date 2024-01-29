@@ -32,10 +32,12 @@ export function LogoutBtn() {
           <DropdownMenuItem>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link to={"/partner-with-us"}>Add Restraunant</Link>
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          <Link to={"/partner-with-us"}>
+            <DropdownMenuItem>
+              Add Restraunant
+              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </Link>
           <DropdownMenuItem>
             My Restaurant
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>

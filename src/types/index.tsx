@@ -35,3 +35,13 @@ export type LocartionProps = {
   a: number;
   b: number;
 };
+
+export interface restaurantProps {
+  restaurantId?: number;
+  orderDate: string;
+  orderId: number;
+  totalAmount: number;
+  userId?: number;
+  userName: string;
+  mobileNo: string;
+}
