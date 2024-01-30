@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { BrowserRouter as Router } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
@@ -19,12 +18,10 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
-    <Router>
-      <ToastContainer />
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <App />
-      </QueryClientProvider>
-    </Router>
+    <ToastContainer />
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <App />
+    </QueryClientProvider>
   </>
 );
