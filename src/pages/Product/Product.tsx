@@ -7,13 +7,11 @@ const Product = () => {
   const summary = useLocation().state;
   const [qty, setQty] = useState(1);
   const data = {
-    userId: User.userId,
+    userId: User?.userId,
     totalAmount: summary?.price * qty,
     restaurantId: 0,
   };
-
   AddOrders(data);
-
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-white">
       <div className="container px-5 py-24 mx-auto">

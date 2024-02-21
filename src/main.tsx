@@ -2,8 +2,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "./app/store.ts";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
@@ -23,12 +21,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
     <Router>
       <ToastContainer />
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <App />
-        </QueryClientProvider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <App />
+      </QueryClientProvider>
     </Router>
   </>
 );

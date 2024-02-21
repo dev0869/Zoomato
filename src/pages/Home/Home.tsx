@@ -24,10 +24,9 @@ const Home = () => {
 
   return (
     <div className="py-4">
-      <p className="py-5 text-4xl text-grays">
-        Inspiration for your first order
-      </p>
-      <Category />
+      <div className="bg-[#F8F8F8]">
+        <Category />
+      </div>
       <Products />
     </div>
   );

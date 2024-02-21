@@ -18,6 +18,19 @@ export const RegisterSchemas = z.object({
 });
 export type RegisterSchemaType = z.infer<typeof RegisterSchemas>;
 
+export const RestaurantSchema = z.object({
+  restaurantID: z.number().optional(),
+  name: z.string().min(3, "Restraurant Name Be Must"),
+  cuisineType: z.string().min(3, "Type Name Be Must"),
+  address: z.string().min(2, "Enter Adress Please"),
+  contactNo: z
+    .string()
+    .min(10, "Enter Valid Number")
+    .max(10, "Enter Valid Number"),
+  openingHours: z.string().min(2, "Enter Opening Hours"),
+});
+export type RestaurantSchemaType = z.infer<typeof RestaurantSchema>;
+
 export type checkoutType = {
   userId: number;
   totalAmount: number;

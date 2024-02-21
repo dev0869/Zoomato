@@ -34,8 +34,7 @@ export const loginApi = async (data: LoginInferSchema) => {
     if (res.data.result === false) {
       toast.error(`${res.data.message}`);
     } else if (res.data.result === true) {
-      // localStorage.setItem("user", JSON.stringify(res.data.data));
-
+      localStorage.setItem("user", JSON.stringify(res.data?.data));
       toast.success("Login Successfully");
     }
     return res.data?.data;

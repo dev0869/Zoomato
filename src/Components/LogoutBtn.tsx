@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { Link } from "react-router-dom";
 export function LogoutBtn() {
   const Logout = () => {
     localStorage.removeItem("user");
@@ -31,12 +32,14 @@ export function LogoutBtn() {
           <DropdownMenuItem>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
+          <Link to={"/partner-with-us"}>
+            <DropdownMenuItem>
+              Add Restraunant
+              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </Link>
           <DropdownMenuItem>
-            Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Settings
+            My Restaurant
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
