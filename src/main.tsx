@@ -1,7 +1,10 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+<<<<<<< HEAD
 import { BrowserRouter as Router } from "react-router-dom";
+=======
+>>>>>>> 45587335abecff43c48954c9a9391dfe69578b35
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
@@ -19,6 +22,7 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
+<<<<<<< HEAD
     <Router>
       <ToastContainer />
       <QueryClientProvider client={queryClient}>
@@ -26,5 +30,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <App />
       </QueryClientProvider>
     </Router>
+=======
+    <ToastContainer />
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <App />
+    </QueryClientProvider>
+>>>>>>> 45587335abecff43c48954c9a9391dfe69578b35
   </>
 );
